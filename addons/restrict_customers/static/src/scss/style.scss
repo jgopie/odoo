@@ -1,0 +1,18 @@
+.fuel_approval_group .o_field_boolean {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    
+    input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #555;  // stronger border
+        border-radius: 3px;
+    }
+
+    input[type="checkbox"]:disabled {
+        background-color: #f5f5f5;
+        border-color: #ccc;
+        cursor: not-allowed;
+    }
+}

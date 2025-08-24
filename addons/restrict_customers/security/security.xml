@@ -1,0 +1,15 @@
+<odoo>
+    <!-- Custom Module Category -->
+    <record id="module_category_fuel_management" model="ir.module.category">
+        <field name="name">Fuel Management</field>
+        <field name="description">Security groups related to fuel approval and distribution</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- Finance Group -->
+    <record id="group_fuel_approval_finance" model="res.groups">
+        <field name="name">Fuel Approval - Finance</field>
+        <field name="category_id" ref="restrict_customers.module_category_fuel_management"/>
+    </record>
+
+</odoo>

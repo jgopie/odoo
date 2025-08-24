@@ -1,0 +1,27 @@
+<odoo>
+    <!-- Distribution Roles -->
+    <record id="group_distribution_clerk" model="res.groups">
+        <field name="name">Distribution Clerk</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="group_fuel_dispatcher" model="res.groups">
+        <field name="name">Fuel Dispatcher</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="group_fuel_invoice_dn_verifier" model="res.groups">
+        <field name="name">Fuel Invoice &amp; DN Verifier</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="group_distribution_coordinator" model="res.groups">
+        <field name="name">Distribution Coordinator</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="group_distribution_team_lead" model="res.groups">
+        <field name="name">Distribution Team Lead</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+</odoo>
