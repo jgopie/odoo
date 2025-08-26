@@ -14,15 +14,18 @@ class SaleOrderLineRestriction(models.Model):
                 raise ValidationError(f"Customer {partner.name} not approved to purchase Diesel.")
             elif product_name == "Gasoline" and not partner.approved_gasoline:
                 raise ValidationError(f"Customer {partner.name} not approved to purchase Gasoline.")
+            elif product_name == "Kerosene" and not partner.approved_kerosene:
+                raise ValidationError(f"Customer {partner.name} not approved to purchase Kerosene.")
             
 class ResPartner(models.Model):
     _inherit = "res.partner"
     approved_diesel = fields.Boolean(string="Approved to purchase Diesel")
     approved_gasoline = fields.Boolean(string="Approved to purchase Gasoline")
+    approved_kerosene = fields.Boolean(string="Approved to purchase Kerosene")
 
     @api.model
     def write(self, vals):
         if not self.env.user.has_group('restrict_customers.group_fuel_approval_finance'):
-            if 'approved_diesel' in vals or 'approved_gasoline' in vals:
+            if 'approved_diesel' in vals or 'approved_gasoline' in vals or 'approved_kerosene' in vals:
                 raise exceptions.UserError("You are not allowed to modify fuel approvals.")
         return super().write(vals)

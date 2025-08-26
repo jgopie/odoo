@@ -9,7 +9,7 @@
     <!-- Finance Group -->
     <record id="group_fuel_approval_finance" model="res.groups">
         <field name="name">Fuel Approval - Finance</field>
-        <field name="category_id" ref="restrict_customers.module_category_fuel_management"/>
+        <field name="category_id" ref="module_category_fuel_management"/>
     </record>
 
 </odoo>
