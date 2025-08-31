@@ -6,8 +6,9 @@
     "depends": ["fleet"],
     "data": [
         "security/ir.model.access.csv",
+        "views/rtw_views.xml",
         ],
     "assets": {},
     "installable": True,
-    "application": False,
+    "application": True,
 }

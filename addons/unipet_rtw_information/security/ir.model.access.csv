@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-unipet_rtw_information.access_fleet_vehicle_compartment,access_fleet_vehicle_compartment,unipet_rtw_information.model_fleet_vehicle_compartment,base.group_user,1,0,0,0
