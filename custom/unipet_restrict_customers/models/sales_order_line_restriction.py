@@ -9,7 +9,7 @@ class SaleOrderLineRestriction(models.Model):
     def _check_customer_approval(self):
         for line in self:
             partner = line.order_id.partner_id
-            product_name = line.product_id.product_tmpl.name
+            product_name = line.product_id.product_tmpl_id.name
             if product_name == "Diesel" and not partner.approved_diesel:
                 raise ValidationError(f"Customer {partner.name} not approved to purchase Diesel.")
             elif product_name == "Gasoline" and not partner.approved_gasoline:

@@ -5,7 +5,6 @@ class FuelDispatch(models.Model):
     _description = "Fuel Dispatch"
 
     dispatch_datetime = fields.Datetime(
-        required = True, 
         default=datetime.now() + timedelta(days=1),
         string="Dispatch Date & Time"
     )
@@ -21,7 +20,6 @@ class FuelDispatch(models.Model):
             ("chag_eog", "Chaguaramas Storage EOG")
         ],
         string="Dispatch From Location",
-        required=True,
     )
     customer_id = fields.Many2one(
         comodel_name="res.partner",
@@ -30,7 +28,6 @@ class FuelDispatch(models.Model):
         domain=[("is_company", "=", True)]
     )
     transport_method = fields.Selection(
-        required=True,
         selection=[
             ("rtw", "RTW"),
             ("direct_tank", "Direct Tank"),
@@ -43,7 +40,9 @@ class FuelDispatch(models.Model):
     )
     sale_order_id = fields.Many2one(
         comodel_name="sale.order",
-        string="Sales Order"
+        string="Sales Order",
+        store=True,
+        readonly=True,
     )
     is_verified = fields.Boolean(required=True, default=False, string="Verification Status")
     order_quantity = fields.Float(required=True, string="Order Quantity")
@@ -51,6 +50,15 @@ class FuelDispatch(models.Model):
         comodel_name="distribution.fuel_dispatch.fuel_line",
         inverse_name="dispatch_id",
         string="Dispatch Lines",
+    )
+    product_id = fields.Many2one(
+        comodel_name="product.product",
+        string="Product",
+        required=True
+    )
+    sale_order_line_id = fields.Many2one(
+        comodel_name="sale.order.line",
+        ondelete="cascade"
     )
 
     @api.onchange('rtw_trailer')
