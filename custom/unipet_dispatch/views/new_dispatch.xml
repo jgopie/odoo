@@ -1,0 +1,85 @@
+<odoo>
+    <record id="view_dispatch_line_list" model="ir.ui.view">
+        <field name="name">distribution.fuel_dispatch.fuel_line.list</field>
+        <field name="model">distribution.fuel_dispatch.fuel_line</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="compartment_id" />
+                <field name="quantity" />
+            </list>
+        </field>
+    </record>
+
+    <record id="view_new_dispatch_form" model="ir.ui.view">
+        <field name="name">distribution.fuel_dispatch.form</field>
+        <field name="model">distribution.fuel_dispatch</field>
+        <field name="arch" type="xml">
+            <form string="New Dispatch">
+                <sheet>
+                    <group>
+                        <field name="dispatch_datetime" />
+                        <field name="dispatch_from_location" />
+                        <field name="customer_id" />
+                        <field name="order_quantity" />
+                        <field name="is_verified" />
+                    </group>
+                    <notebook>
+                        <page string="Sales Information">
+                            <group>
+                                <field name="sale_order_id" />
+                                <field name="invoice_num_ref" />
+                                <field name="delivery_note_ref" />
+                            </group>
+                        </page>
+                        <page string="Transport Information">
+                            <group>
+                                <field name="transport_method" />
+                            </group>
+                            <group invisible="transport_method != 'rtw'">
+                                <field name="rtw_trailer" />
+                                <field name="line_ids" editable="bottom" options="{'no_create': False}"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- <record id="view_dispatch_line_form" model="ir.ui.view">
+        <field name="name">distribution.fuel_dispatch.fuel_line.form</field>
+        <field name="model">distribution.fuel_dispatch.fuel_line</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="compartment_id" />
+                    <field name="quantity" />
+                </group>
+            </form>
+        </field>
+    </record> -->
+
+
+    <record id="view_dispatch_list" model="ir.ui.view">
+        <field name="name">distribution.fuel_dispatch.list</field>
+        <field name="model">distribution.fuel_dispatch</field>
+        <field name="arch" type="xml">
+            <list string="Dispatches">
+                <field name="dispatch_datetime" />
+                <field name="dispatch_from_location" />
+                <field name="customer_id" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_new_dispatch" model="ir.actions.act_window">
+        <field name="name">Dispatch</field>
+        <field name="res_model">distribution.fuel_dispatch</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+
+    <menuitem id="menu_dispatch_root" name="Dispatch">
+        <menuitem id="menu_fuel_dispatch_action" action="action_new_dispatch" />
+    </menuitem>
+</odoo>

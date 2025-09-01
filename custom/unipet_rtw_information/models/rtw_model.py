@@ -37,9 +37,7 @@ class Trailer(models.Model):
         ("crb", "CRB")
     ])
 
-    @api.depends("compartments")
+    @api.depends("compartments.capacity")
     def _compute_capacity(self):
-        total = 0
-        for comp in self.compartments:
-            total += comp.capacity
-        self.capacity = total
+        for trailer in self:
+            trailer.capacity = sum(trailer.compartments.mapped('capacity'))

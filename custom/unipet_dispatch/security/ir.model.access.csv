@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+unipet_dispatch.access_distribution_fuel_dispatch,access_distribution_fuel_dispatch,unipet_dispatch.model_distribution_fuel_dispatch,base.group_user,1,1,1,1
+unipet_dispatch.access_distribution_fuel_dispatch_fuel_line,access_distribution_fuel_dispatch_fuel_line,unipet_dispatch.model_distribution_fuel_dispatch_fuel_line,base.group_user,1,1,1,1
