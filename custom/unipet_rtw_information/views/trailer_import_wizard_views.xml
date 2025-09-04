@@ -1,0 +1,100 @@
+<odoo>
+    <!-- Import Wizard Form View -->
+    <record id="trailer_import_wizard_form" model="ir.ui.view">
+        <field name="name">Trailer Import Wizard Form</field>
+        <field name="model">rtw_information.trailer.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Trailers">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="file_name" placeholder="Import Trailers from CSV" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="import_file" filename="file_name"/>
+                            <field name="file_name" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="import_mode"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="CSV Format Instructions">
+                            <field name="sample_data" widget="text" readonly="1"/>
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <footer>
+                    <button name="action_import_trailers" string="Import Trailers" type="object" class="btn-primary"/>
+                    <button name="action_download_sample" string="Download Sample CSV" type="object" class="btn-secondary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Import Wizard -->
+    <record id="action_trailer_import_wizard" model="ir.actions.act_window">
+        <field name="name">Import Trailers</field>
+        <field name="res_model">rtw_information.trailer.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{}</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_trailer_import" name="Import Trailers" parent="menu_rtw_information_root" action="action_trailer_import_wizard" sequence="100"/>
+
+    <!-- Alternative: Add to existing trailer list view as action button -->
+    <record id="trailer_list_view_inherit" model="ir.ui.view">
+        <field name="name">trailer.list.view.inherit</field>
+        <field name="model">rtw_information.trailer</field>
+        <field name="inherit_id" ref="view_rtw_trailer_list"/>
+        <!-- Use the actual list view external ID -->
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="attributes">
+                <attribute name="import">false</attribute>                <!-- Disable default import to use our wizard -->
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Add Import Action to Trailer List View -->
+    <record id="action_trailer_list_with_import" model="ir.actions.act_window">
+        <field name="name">Trailers</field>
+        <field name="res_model">rtw_information.trailer</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first trailer!
+            </p>
+            <p>
+                Use the Import Trailers button to bulk import from CSV files.
+            </p>
+        </field>
+    </record>
+
+
+    <!-- Server Action for Import Button -->
+    <record id="action_open_trailer_import_wizard" model="ir.actions.server">
+        <field name="name">Import Trailers</field>
+        <field name="model_id" ref="model_rtw_information_trailer"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = {
+                'type': 'ir.actions.act_window',
+                'name': 'Import Trailers',
+                'res_model': 'rtw_information.trailer.import.wizard',
+                'view_mode': 'form',
+                'target': 'new',
+                'context': {},
+            }
+        </field>
+    </record>
+
+</odoo>

@@ -7,6 +7,7 @@
     "data": [
         "security/ir.model.access.csv",
         "views/rtw_views.xml",
+        "views/trailer_import_wizard_views.xml",
         ],
     "assets": {},
     "installable": True,
