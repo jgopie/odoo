@@ -65,11 +65,22 @@
         <field name="name">distribution.fuel_dispatch.list</field>
         <field name="model">distribution.fuel_dispatch</field>
         <field name="arch" type="xml">
-            <list string="Dispatches">
-                <field name="dispatch_datetime" />
-                <field name="dispatch_from_location" />
-                <field name="customer_id" />
-                <field name="product_id"/>
+            <list string="Dispatches" class="table table-striped table-hover" create="true" delete="true">
+
+                <!-- DateTime field with proper width and alignment -->
+                <field name="dispatch_datetime" decoration-bf="1" widget="datetime" string="Dispatch Date &amp; Time" width="20%" class="text-center"/>
+
+                <!-- Location field with proper spacing -->
+                <field name="dispatch_from_location" decoration-it="1" string="From Location" width="15%" class="text-left"/>
+
+                <!-- Customer field with emphasis -->
+                <field name="customer_id" decoration-bf="1" string="Customer" width="30%" class="text-left"/>
+
+                <!-- Product field with tags styling -->
+                <field name="product_id" widget="many2one_tags" string="Product" width="25%" class="text-left"/>
+
+                <field name="verification_status_display" string="Verification Status" width="10%" class="text-left" />
+
             </list>
         </field>
     </record>

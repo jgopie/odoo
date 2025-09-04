@@ -61,6 +61,16 @@ class FuelDispatch(models.Model):
         ondelete="cascade"
     )
 
+    verification_status_display = fields.Char(
+        string="Verification Status",
+        compute="_compute_verification_status_display"
+    )
+
+    @api.depends('is_verified')
+    def _compute_verification_status_display(self):
+        for record in self:
+            record.verification_status_display = "Verified" if record.is_verified else "Not Verified"
+
     @api.onchange('rtw_trailer')
     def _onchange_rtw_trailer(self):
         for dispatch in self:
