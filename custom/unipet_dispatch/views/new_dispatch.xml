@@ -41,6 +41,9 @@
                                 <field name="line_ids" editable="bottom" options="{'no_create': False}"/>
                             </group>
                         </page>
+                        <page string="Attachments">
+                            <field name="attachment_ids" widget="many2many_binary" options="{'no_create': True}" />
+                        </page>
                     </notebook>
                 </sheet>
             </form>

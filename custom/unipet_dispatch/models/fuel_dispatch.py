@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 class FuelDispatch(models.Model):
     _name = "distribution.fuel_dispatch"
     _description = "Fuel Dispatch"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
 
     dispatch_datetime = fields.Datetime(
         default=datetime.now() + timedelta(days=1),
@@ -64,6 +65,14 @@ class FuelDispatch(models.Model):
     verification_status_display = fields.Char(
         string="Verification Status",
         compute="_compute_verification_status_display"
+    )
+
+    attachment_ids = fields.Many2many(
+        comodel_name="ir.attachment",
+        relation="fuel_dispatch_attachment_rel",
+        column1="dispatch_id",
+        column2="attachment_id",
+        string="Attachments"
     )
 
     @api.depends('is_verified')
